@@ -11,12 +11,12 @@ stages:
     steps:
     - bash: echo install packages
     - bash: npm install
-    - bash: ls $(Build.ArtifactStagingDirectory)
+    - bash: ls $(Build.SourcesDirectory)
   - job: BuildJob
     dependsOn: InstallJob
     steps:
     - bash: echo build app
-    - bash: ls $(Build.ArtifactStagingDirectory)
+    - bash: ls $(Build.SourcesDirectory)
 - stage: Deploy
   dependsOn: Build
   jobs:

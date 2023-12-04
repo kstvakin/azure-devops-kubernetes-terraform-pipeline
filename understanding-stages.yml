@@ -1,19 +1,23 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- main
+- master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+stages:
+- stage: Build
+  jobs:
+  - job: InstallJob
+    steps:
+    - bash: echo install packages
+    - bash: npm install
+  - job: BuildJob
+    steps:
+    - bash: echo build app
+    - bash: npm run build
+- stage: Deploy
+  jobs:
+  - job: DeployJob
+    steps:
+    - bash: echo DeployJob
+    - bash: npm run start

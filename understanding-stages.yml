@@ -12,12 +12,14 @@ stages:
     - bash: echo install packages
     - bash: npm install
   - job: BuildJob
+    dependsOn: InstallJob
     steps:
     - bash: echo build app
     - bash: npm run build
 - stage: Deploy
   jobs:
   - job: DeployJob
+    dependsOn: BuildJob
     steps:
     - bash: echo DeployJob
     - bash: npm run start

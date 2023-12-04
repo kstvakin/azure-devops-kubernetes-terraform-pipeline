@@ -17,7 +17,7 @@ stages:
     steps:
     - bash: echo build app
     - bash: cd $(System.DefaultWorkingDirectory)
-    - bash: npm run build 
+    - bash: ls 
 - stage: Deploy
   dependsOn: Build
   jobs:

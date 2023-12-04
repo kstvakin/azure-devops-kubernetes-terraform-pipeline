@@ -11,12 +11,17 @@ stages:
     steps:
     - bash: echo install packages
     - bash: npm install
-    - bash: ls $(Build.SourcesDirectory)
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - bash: ls $(Build.ArtifactStagingDirectory)
   - job: BuildJob
     dependsOn: InstallJob
     steps:
     - bash: echo build app
-    - bash: ls $(Build.SourcesDirectory)
+    - bash: ls $(Build.ArtifactStagingDirectory)
 - stage: Deploy
   dependsOn: Build
   jobs:

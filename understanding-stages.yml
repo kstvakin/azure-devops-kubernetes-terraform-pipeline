@@ -17,6 +17,11 @@ stages:
         Contents: '**'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
     - bash: ls $(Build.ArtifactStagingDirectory)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
   - job: BuildJob
     dependsOn: InstallJob
     steps:

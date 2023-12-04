@@ -17,9 +17,9 @@ stages:
     - bash: echo build app
     - bash: npm run build
 - stage: Deploy
+  dependsOn: Build
   jobs:
   - job: DeployJob
-    dependsOn: BuildJob
     steps:
     - bash: echo DeployJob
     - bash: npm run start

@@ -11,6 +11,7 @@ stages:
     steps:
     - bash: echo install packages
     - bash: npm install
+    - bash: npm run build 
     - bash: ls $(System.DefaultWorkingDirectory)
   - job: BuildJob
     dependsOn: InstallJob

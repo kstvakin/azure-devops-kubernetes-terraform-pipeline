@@ -15,6 +15,12 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+ENV DB_USERNAME=avnadmin
+ENV DB_PASSWORD=AVNS_Nza7lFkOogE1Nrqt3yr
+ENV DB_NAME=defaultdb
+ENV DB_HOSTNAME=mysql-1c56fa7e-kayodeakinmboni-8441.a.aivencloud.com
+ENV DB_PORT=21132
+
 # Creates a "dist" folder with the production build
 RUN npm run build
 

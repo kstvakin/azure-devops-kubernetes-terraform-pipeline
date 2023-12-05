@@ -11,9 +11,10 @@ stages:
     steps:
     - bash: echo install packages
     - bash: npm install
+    - bash: npm run build
     - task: CopyFiles@2
       inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        SourceFolder: '$(System.DefaultWorkingDirectory)/.next'
         Contents: '**'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
     - bash: ls $(Build.ArtifactStagingDirectory)
@@ -22,11 +23,6 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'drop'
         publishLocation: 'Container'
-  - job: BuildJob
-    dependsOn: InstallJob
-    steps:
-    - bash: echo build app
-    - bash: ls $(Build.ArtifactStagingDirectory)
 - stage: Deploy
   dependsOn: Build
   jobs:
